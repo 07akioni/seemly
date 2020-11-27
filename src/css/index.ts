@@ -8,6 +8,8 @@ export function depx (value: string | number): number {
   return value
 }
 
-export function pxfy (value: string) {
+export function pxfy (value: string | number): string {
+  if (typeof value === 'number') return `${value}px`
+  if (value.endsWith('px')) return value
   return `${value}px`
 }
