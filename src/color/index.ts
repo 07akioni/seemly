@@ -77,6 +77,10 @@ function normalizeChannel (channelValue: number): number {
   return Math.floor(channelValue)
 }
 
+function normalizeAlpha (alphaValue: number): number {
+  return alphaValue > 1 ? 1 : (alphaValue < 0 ? 0 : alphaValue)
+}
+
 function stringifyRgba (r: number, g: number, b: number, a: number): string {
   return `rgba(${
     normalizeChannel(r)
@@ -85,7 +89,7 @@ function stringifyRgba (r: number, g: number, b: number, a: number): string {
   }, ${
     normalizeChannel(b)
   }, ${
-    a
+    normalizeAlpha(a)
   })`
 }
 
