@@ -71,6 +71,24 @@ export function rgba (color: string): RGBA {
   }
 }
 
+function normalizeChannel (channelValue: number): number {
+  if (channelValue > 255) return 255
+  if (channelValue < 0) return 0
+  return Math.floor(channelValue)
+}
+
+function stringifyRgba (r: number, g: number, b: number, a: number): string {
+  return `rgba(${
+    normalizeChannel(r)
+  }, ${
+    normalizeChannel(g)
+  }, ${
+    normalizeChannel(b)
+  }, ${
+    a
+  })`
+}
+
 function compositeChannel (v1: number, a1:number, v2:number, a2:number, a:number) {
   return Math.floor((v1 * a1 * (1 - a2) + v2 * a2) / a)
 }
@@ -81,13 +99,12 @@ export function composite (background: string | RGB | RGBA, overlay: string | RG
   const a1 = (background as RGBA)[3]
   const a2 = (overlay as RGBA)[3]
   const alpha = (a1 + a2 - a1 * a2)
-  return `rgba(${
-    compositeChannel(background[0], a1, overlay[0], a2, alpha)
-  }, ${
-    compositeChannel(background[1], a1, overlay[1], a2, alpha)
-  }, ${
-    compositeChannel(background[2], a1, overlay[2], a2, alpha)
-  }, ${alpha})`
+  return  stringifyRgba(
+    compositeChannel(background[0], a1, overlay[0], a2, alpha),
+    compositeChannel(background[1], a1, overlay[1], a2, alpha),
+    compositeChannel(background[2], a1, overlay[2], a2, alpha),
+    alpha
+  )
 }
 
 interface ChangeColorOptions {
@@ -95,11 +112,11 @@ interface ChangeColorOptions {
 }
 
 export function changeColor (base: string | RGB | RGBA, options: ChangeColorOptions): string {
-  const [r, g, b, a] = Array.isArray(base) ? base : rgba(base)
+  const [r, g, b, a = 1] = Array.isArray(base) ? base : rgba(base)
   if (options.alpha) {
-    return `rgba(${r}, ${g}, ${b}, ${options.alpha})`
+    return stringifyRgba(r, g, b, options.alpha)
   }
-  return `rgba(${r}, ${g}, ${b}, ${a})`
+  return stringifyRgba(r, g, b, a)
 }
 
 interface ScaleColorOptions {
@@ -107,12 +124,12 @@ interface ScaleColorOptions {
 }
 
 export function scaleColor (base: string | RGB | RGBA, options: ScaleColorOptions): string {
-  const [r, g, b, a] = Array.isArray(base) ? base : rgba(base)
+  const [r, g, b, a = 1] = Array.isArray(base) ? base : rgba(base)
   const {
     lightness
   } = options
   if (lightness !== undefined) {
-    return `rgba(${r * lightness}, ${g * lightness}, ${b * lightness}, ${a})`
+    return stringifyRgba(r, g, b, a)
   }
-  return `rgba(${r}, ${g}, ${b}, ${a})`
+  return stringifyRgba(r, g, b, a)
 }
