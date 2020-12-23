@@ -95,9 +95,24 @@ interface ChangeColorOptions {
 }
 
 export function changeColor (base: string | RGB | RGBA, options: ChangeColorOptions): string {
-  const [r, g, b] = Array.isArray(base) ? base : rgba(base)
+  const [r, g, b, a] = Array.isArray(base) ? base : rgba(base)
   if (options.alpha) {
     return `rgba(${r}, ${g}, ${b}, ${options.alpha})`
   }
-  return `rgb(${r}, ${g}, ${b})`
+  return `rgba(${r}, ${g}, ${b}, ${a})`
+}
+
+interface ScaleColorOptions {
+  lightness?: number
+}
+
+export function scaleColor (base: string | RGB | RGBA, options: ScaleColorOptions): string {
+  const [r, g, b, a] = Array.isArray(base) ? base : rgba(base)
+  const {
+    lightness
+  } = options
+  if (lightness !== undefined) {
+    return `rgba(${r * lightness}, ${g * lightness}, ${b * lightness}, ${a})`
+  }
+  return `rgba(${r}, ${g}, ${b}, ${a})`
 }
