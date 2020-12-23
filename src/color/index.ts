@@ -120,16 +120,15 @@ export function changeColor (base: string | RGB | RGBA, options: ChangeColorOpti
 }
 
 interface ScaleColorOptions {
-  lightness?: number
+  lightness?: number,
+  alpha?: number
 }
 
 export function scaleColor (base: string | RGB | RGBA, options: ScaleColorOptions): string {
   const [r, g, b, a = 1] = Array.isArray(base) ? base : rgba(base)
   const {
-    lightness
+    lightness = 1,
+    alpha = 1
   } = options
-  if (lightness !== undefined) {
-    return stringifyRgba(r, g, b, a)
-  }
-  return stringifyRgba(r, g, b, a)
+  return stringifyRgba(r * lightness, g * lightness, b * lightness, a * alpha)
 }
