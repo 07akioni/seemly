@@ -11,11 +11,20 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig.cjs.json && tsc -p tsconfig.esm.json",
+    "test": "jest src/**/*.spec.ts",
     "release": "npm run build && npm publish"
   },
   "author": "07akioni",
   "license": "MIT",
   "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-typescript": "^7.12.7",
+    "babel-jest": "^26.6.3",
+    "jest": "^26.6.3",
     "typescript": "^4.1.2"
+  },
+  "dependencies": {
+    "@types/jest": "^26.0.20"
   }
 }
