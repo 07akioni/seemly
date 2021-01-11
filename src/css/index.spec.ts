@@ -1,8 +1,16 @@
-import { getMargin } from './index'
+import { depx, getMargin, pxfy } from './index'
 
 getMargin('0')
 
 describe('#css', () => {
+  describe('#depx & pxfy', () => {
+    expect(depx(1)).toEqual(1)
+    expect(depx('1')).toEqual(1)
+    expect(depx('1px')).toEqual(1)
+    expect(pxfy(1)).toEqual('1px')
+    expect(pxfy('1')).toEqual('1px')
+    expect(pxfy('1px')).toEqual('1px')
+  })
   describe('#getMargin', () => {
     it('works with `0`', () => {
       expect(getMargin('0')).toEqual({
