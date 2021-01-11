@@ -5,6 +5,6 @@ function flushCallbacks (): void {
   cbs = []
 }
 
-export function nextFrame (cb: Function): void {
+export function beforeNextFrame (cb: Function): void {
   cbs.push(cb) === 1 && requestAnimationFrame(flushCallbacks)
 }

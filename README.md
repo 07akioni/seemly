@@ -13,10 +13,10 @@ import { xxx } from 'seemly'
 
 ## API
 ### Animation
-#### `nextFrame(callback: Function): void`
+#### `beforeNextFrame(callback: Function): void`
 Call the callback function before next frame.
 
-#### `nextFrameOnce(callback: Function): void`
+#### `beforeNextFrameOnce(callback: Function): void`
 Call the callback function before next frame. Same function won't be called more than once.
 
 ### Color

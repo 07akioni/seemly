@@ -1,5 +1,5 @@
-export { nextFrameOnce } from './animation/next-frame-once'
-export { nextFrame } from './animation/next-frame'
+export { beforeNextFrameOnce } from './animation/next-frame-once'
+export { beforeNextFrame } from './animation/next-frame'
 export { getScrollParent } from './dom/get-scroll-parent'
 export { unwrapElement } from './dom/unwrap-element'
 export { depx, pxfy } from './css/index'
