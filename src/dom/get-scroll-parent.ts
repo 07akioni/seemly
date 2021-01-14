@@ -6,7 +6,7 @@ function getParentNode (node: Node): Node | null {
   return node.parentNode
 }
 
-export function getScrollParent (node: Node | null): HTMLElement | Document | null {
+export function getScrollParent (node: Node | null): HTMLElement | null {
   if (node === null) return null
 
   const parentNode = getParentNode(node)
@@ -17,7 +17,7 @@ export function getScrollParent (node: Node | null): HTMLElement | Document | nu
 
   // Document
   if (parentNode.nodeType === 9) {
-    return document
+    return document.documentElement
   }
 
   // Element
