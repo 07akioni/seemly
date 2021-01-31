@@ -1,6 +1,6 @@
 {
   "name": "seemly",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Utils for user interface.",
   "main": "lib/index.js",
   "module": "es/index.js",
