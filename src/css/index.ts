@@ -14,8 +14,8 @@ export function pxfy (value: string | number): string {
   return `${value}px`
 }
 
-type Position = 'top' | 'right' | 'bottom' | 'left'
-interface Margin {
+export type Position = 'top' | 'right' | 'bottom' | 'left'
+export interface Margin {
   top: string
   right: string
   bottom: string
