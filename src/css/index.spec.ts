@@ -10,6 +10,8 @@ describe('#css', () => {
     expect(pxfy(1)).toEqual('1px')
     expect(pxfy('1')).toEqual('1px')
     expect(pxfy('1px')).toEqual('1px')
+    expect(pxfy(undefined)).toEqual(undefined)
+    expect(pxfy(null)).toEqual(undefined)
   })
   describe('#getMargin', () => {
     it('works with `0`', () => {

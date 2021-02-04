@@ -8,11 +8,16 @@ export function depx (value: string | number): number {
   return value
 }
 
-export function pxfy (value: string | number): string {
+function pxfy (value: undefined | null): undefined
+function pxfy (value: string | number): string
+function pxfy (value: string | number | undefined | null): string | undefined {
+  if (value === undefined || value === null) return undefined
   if (typeof value === 'number') return `${value}px`
   if (value.endsWith('px')) return value
   return `${value}px`
 }
+
+export { pxfy }
 
 export type Position = 'top' | 'right' | 'bottom' | 'left'
 export interface Margin {
