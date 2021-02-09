@@ -1,5 +1,5 @@
-type RGBA = [number, number, number, number]
-type RGB = [number, number, number]
+export type RGBA = [number, number, number, number]
+export type RGB = [number, number, number]
 
 const prefix = '^\\s*'
 const suffix = '\\s*$'
@@ -111,7 +111,7 @@ export function composite (background: string | RGB | RGBA, overlay: string | RG
   )
 }
 
-interface ChangeColorOptions {
+export interface ChangeColorOptions {
   alpha?: number
 }
 
@@ -123,7 +123,7 @@ export function changeColor (base: string | RGB | RGBA, options: ChangeColorOpti
   return stringifyRgba(r, g, b, a)
 }
 
-interface ScaleColorOptions {
+export interface ScaleColorOptions {
   lightness?: number,
   alpha?: number
 }

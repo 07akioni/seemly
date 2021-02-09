@@ -8,8 +8,10 @@ export function depx (value: string | number): number {
   return value
 }
 
-function pxfy<T extends string | number | undefined | null> (value: T): T extends string | number ? string : undefined
-function pxfy (value: string | number | undefined | null): string | undefined {
+function pxfy<T extends string | number | undefined | null> (
+  value: T
+): T extends string | number ? string : undefined
+function pxfy(value: string | number | undefined | null): string | undefined {
   if (value === undefined || value === null) return undefined
   if (typeof value === 'number') return `${value}px`
   if (value.endsWith('px')) return value
