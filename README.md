@@ -42,10 +42,15 @@ Append the `'px'` on the input value.
 
 For example: `pxfy(1) === '1px'`, `pxfy('1') === '1px'`, `'pxfy('1px') === '1px')`.
 
-#### `parseClass (utilClassNames: string): Record<string, string>`
+#### `parseResponsiveProp (responsiveProp: string): Record<string, string>`
 Transform a css utility class to a js object.
 
-For example: `parseClass('6 m:12 l:24')` is `{ '': 6, m: '12', l: '24' }`
+For example: `parseResponsiveProp('6 m:12 l:24')` is `{ '': 6, m: '12', l: '24' }`
+
+#### `parseResponsivePropValue (responsiveProp: string, activeKey: string): string | undefined`
+Get corresponding value by key.
+
+For example: `parseResponsiveProp('6 m:12 l:24', 'l')` is `'24'`. `parseResponsiveProp('6 m:12 l:24')`, `parseResponsiveProp('6 m:12 l:24', 'x')` are `'6'`.
 
 ### DOM
 #### `getScrollParent (node: Node | null): HTMLElement | Document | null`

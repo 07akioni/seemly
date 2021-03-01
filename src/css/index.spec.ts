@@ -1,4 +1,4 @@
-import { depx, getMargin, pxfy, parseClass } from './index'
+import { depx, getMargin, pxfy, parseResponsiveProp, parseResponsivePropValue } from './index'
 
 getMargin('0')
 
@@ -63,29 +63,36 @@ describe('#css', () => {
       expect(getMargin(`0 1 2 3`, 'top')).toEqual('0')
     })
   })
-  describe('#parseClass', () => {
-    expect(parseClass('')).toEqual({})
-    expect(parseClass('123')).toEqual({
+  describe('#parseResponsiveProp', () => {
+    expect(parseResponsiveProp('')).toEqual({})
+    expect(parseResponsiveProp('123')).toEqual({
       '': '123'
     })
-    expect(parseClass('123 m:223')).toEqual({
+    expect(parseResponsiveProp('123 m:223')).toEqual({
       '': '123',
       m: '223'
     })
-    expect(parseClass('123 m:223 l:323')).toEqual({
+    expect(parseResponsiveProp('123 m:223 l:323')).toEqual({
       '': '123',
       m: '223',
       l: '323'
     })
-    expect(parseClass('123 m:2-23 l:3-23')).toEqual({
+    expect(parseResponsiveProp('123 m:2-23 l:3-23')).toEqual({
       '': '123',
       m: '2-23',
       l: '3-23'
     })
-    expect(parseClass('  123  m:2-23  l:3-23  ')).toEqual({
+    expect(parseResponsiveProp('  123  m:2-23  l:3-23  ')).toEqual({
       '': '123',
       m: '2-23',
       l: '3-23'
     })
+  })
+  describe('#parseResponsivePropValue', () => {
+    expect(parseResponsivePropValue('  123  m:2-23  l:3-23  ', undefined)).toEqual('123')
+    expect(parseResponsivePropValue('  123  m:2-23  l:3-23  ', 'm')).toEqual('2-23')
+    expect(parseResponsivePropValue('  123  m:2-23  l:3-23  ', 'l')).toEqual('3-23')
+    expect(parseResponsivePropValue('  123  m:2-23  l:3-23  ', 'x')).toEqual('123')
+    expect(parseResponsivePropValue('m:2-23  l:3-23  ', 'x')).toEqual(undefined)
   })
 })
