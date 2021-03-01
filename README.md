@@ -42,6 +42,11 @@ Append the `'px'` on the input value.
 
 For example: `pxfy(1) === '1px'`, `pxfy('1') === '1px'`, `'pxfy('1px') === '1px')`.
 
+#### `parseClass (utilClassNames: string): Record<string, string>`
+Transform a css utility class to a js object.
+
+For example: `parseClass('6 m:12 l:24')` is `{ '': 6, m: '12', l: '24' }`
+
 ### DOM
 #### `getScrollParent (node: Node | null): HTMLElement | Document | null`
 Get the scrollable parent node of current node.

@@ -64,3 +64,4 @@ function getMargin (value: string, position?: Position) {
 }
 
 export { getMargin, getMargin as getPadding }
+export { parseClass } from './parse-atom-class'

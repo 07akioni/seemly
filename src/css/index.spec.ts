@@ -1,4 +1,4 @@
-import { depx, getMargin, pxfy } from './index'
+import { depx, getMargin, pxfy, parseClass } from './index'
 
 getMargin('0')
 
@@ -61,6 +61,31 @@ describe('#css', () => {
       expect(getMargin(`0 1 2 3`, 'right')).toEqual('1')
       expect(getMargin(`0 1 2 3`, 'bottom')).toEqual('2')
       expect(getMargin(`0 1 2 3`, 'top')).toEqual('0')
+    })
+  })
+  describe('#parseClass', () => {
+    expect(parseClass('')).toEqual({})
+    expect(parseClass('123')).toEqual({
+      '': '123'
+    })
+    expect(parseClass('123 m:223')).toEqual({
+      '': '123',
+      m: '223'
+    })
+    expect(parseClass('123 m:223 l:323')).toEqual({
+      '': '123',
+      m: '223',
+      l: '323'
+    })
+    expect(parseClass('123 m:2-23 l:3-23')).toEqual({
+      '': '123',
+      m: '2-23',
+      l: '3-23'
+    })
+    expect(parseClass('  123  m:2-23  l:3-23  ')).toEqual({
+      '': '123',
+      m: '2-23',
+      l: '3-23'
     })
   })
 })
