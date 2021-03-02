@@ -33,7 +33,7 @@ function parseResponsivePropValue( // query by number
   activeSize?: number | undefined
 ): string | undefined
 function parseResponsivePropValue( // fallback
-  reponsiveProp: string | number,
+  reponsiveProp: string | number | undefined | null,
   activeKeyOrSize?: number | string | undefined
 ): string | undefined
 function parseResponsivePropValue(
