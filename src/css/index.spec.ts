@@ -88,11 +88,18 @@ describe('#css', () => {
       l: '3-23'
     })
   })
-  describe('#parseResponsivePropValue', () => {
+  describe('#parseResponsivePropValue (by key)', () => {
     expect(parseResponsivePropValue('  123  m:2-23  l:3-23  ', undefined)).toEqual('123')
     expect(parseResponsivePropValue('  123  m:2-23  l:3-23  ', 'm')).toEqual('2-23')
     expect(parseResponsivePropValue('  123  m:2-23  l:3-23  ', 'l')).toEqual('3-23')
     expect(parseResponsivePropValue('  123  m:2-23  l:3-23  ', 'x')).toEqual('123')
     expect(parseResponsivePropValue('m:2-23  l:3-23  ', 'x')).toEqual(undefined)
+  })
+  describe('#parseResponsivePropValue (by width)', () => {
+    expect(parseResponsivePropValue('4  768:5  1280:6', undefined)).toEqual('4')
+    expect(parseResponsivePropValue('4  768:5  1280:6', '')).toEqual('4')
+    expect(parseResponsivePropValue('4  768:5  1280:6', 778)).toEqual('5')
+    expect(parseResponsivePropValue('4  768:5  1280:6', 1290)).toEqual('6')
+    expect(parseResponsivePropValue('4  768:5  1280:6', 600)).toEqual('4')
   })
 })
