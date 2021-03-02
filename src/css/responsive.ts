@@ -1,6 +1,11 @@
 export function parseResponsiveProp(
-  reponsiveProp: string
+  reponsiveProp: string | number
 ): Record<string, string> {
+  if (typeof reponsiveProp === "number") {
+    return {
+      '': reponsiveProp.toString()
+    }
+  }
   const params: Record<string, string> = {}
   reponsiveProp.split(/ +/).forEach((pairLiteral) => {
     if (pairLiteral === '') return
@@ -20,19 +25,19 @@ function parseResponsivePropValue(
   activeKeyOrSize?: number | string | undefined
 ): undefined
 function parseResponsivePropValue( // query by string
-  reponsiveProp: string,
+  reponsiveProp: string | number,
   activeKey?: string | undefined
 ): string | undefined
 function parseResponsivePropValue( // query by number
-  reponsiveProp: string,
+  reponsiveProp: string | number,
   activeSize?: number | undefined
 ): string | undefined
 function parseResponsivePropValue( // fallback
-  reponsiveProp: string,
+  reponsiveProp: string | number,
   activeKeyOrSize?: number | string | undefined
 ): string | undefined
 function parseResponsivePropValue(
-  reponsiveProp: string | undefined | null,
+  reponsiveProp: string | number | undefined | null,
   activeKeyOrSize?: number | string | undefined
 ): string | undefined {
   if (reponsiveProp === undefined || reponsiveProp === null) return undefined
