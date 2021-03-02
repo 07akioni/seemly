@@ -15,13 +15,17 @@ export function parseResponsiveProp(
 }
 
 // Get the responsive string value derived from responive-prop & active-key or active-value
-function parseResponsivePropValue(
+function parseResponsivePropValue( // query by string
   reponsiveProp: string,
   activeKey?: string | undefined
 ): string | undefined
-function parseResponsivePropValue(
+function parseResponsivePropValue( // query by number
   reponsiveProp: string,
   activeSize?: number | undefined
+): string | undefined
+function parseResponsivePropValue( // fallback
+  reponsiveProp: string,
+  activeKeyOrSize?: number | string | undefined
 ): string | undefined
 function parseResponsivePropValue(
   reponsiveProp: string,
