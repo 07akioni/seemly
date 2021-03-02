@@ -64,4 +64,4 @@ function getMargin (value: string, position?: Position) {
 }
 
 export { getMargin, getMargin as getPadding }
-export { parseResponsiveProp, parseResponsivePropValue } from './parse-atom-class'
+export { parseResponsiveProp, parseResponsivePropValue } from './responsive'

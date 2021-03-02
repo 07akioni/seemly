@@ -15,6 +15,10 @@ export function parseResponsiveProp(
 }
 
 // Get the responsive string value derived from responive-prop & active-key or active-value
+function parseResponsivePropValue(
+  reponsiveProp: undefined | null,
+  activeKeyOrSize?: number | string | undefined
+): undefined
 function parseResponsivePropValue( // query by string
   reponsiveProp: string,
   activeKey?: string | undefined
@@ -28,9 +32,10 @@ function parseResponsivePropValue( // fallback
   activeKeyOrSize?: number | string | undefined
 ): string | undefined
 function parseResponsivePropValue(
-  reponsiveProp: string,
+  reponsiveProp: string | undefined | null,
   activeKeyOrSize?: number | string | undefined
 ): string | undefined {
+  if (reponsiveProp === undefined || reponsiveProp === null) return undefined
   const classObj = parseResponsiveProp(reponsiveProp)
   if (activeKeyOrSize === undefined) return classObj['']
   if (typeof activeKeyOrSize === 'string') {
