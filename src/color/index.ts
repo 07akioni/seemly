@@ -81,6 +81,16 @@ function normalizeAlpha (alphaValue: number): number {
   return alphaValue > 1 ? 1 : (alphaValue < 0 ? 0 : alphaValue)
 }
 
+function stringifyRgb (r: number, g: number, b: number): string {
+  return `rgb(${
+    normalizeChannel(r)
+  }, ${
+    normalizeChannel(g)
+  }, ${
+    normalizeChannel(b)
+  })`
+}
+
 function stringifyRgba (r: number, g: number, b: number, a: number): string {
   return `rgba(${
     normalizeChannel(r)
@@ -135,4 +145,18 @@ export function scaleColor (base: string | RGB | RGBA, options: ScaleColorOption
     alpha = 1
   } = options
   return stringifyRgba(r * lightness, g * lightness, b * lightness, a * alpha)
+}
+
+export function getAlpha (base: string | RGB | RGBA): number {
+  const alpha = (Array.isArray(base) ? base : rgba(base))[3] ?? 1
+  return alpha
+}
+
+export function getAlphaString (base: string | RGB | RGBA): string {
+  return `${getAlpha(base)}`
+}
+
+export function toRgbString (base: string | RGB | RGBA): string {
+  const [r, g, b] = Array.isArray(base) ? base : rgba(base)
+  return stringifyRgb(r, g, b)
 }
