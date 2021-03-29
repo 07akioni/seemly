@@ -1,3 +1,5 @@
+import colors  from './colors'
+
 export type RGBA = [number, number, number, number]
 export type RGB = [number, number, number]
 
@@ -18,7 +20,8 @@ function parseHex (value: string): number {
   return parseInt(value, 16)
 }
 
-// color only support #000[0], #000000[00], rgb(0, 0, 0), rgba(0, 0, 0, 0)
+// `color` only support #000[0], #000000[00], rgb(0, 0, 0), rgba(0, 0, 0, 0) and
+// basic color keywords https://www.w3.org/TR/css-color-3/#html4 and transparent
 export function rgba (color: string): RGBA {
   try {
     let i
@@ -64,6 +67,8 @@ export function rgba (color: string): RGBA {
         parseHex(i[3] + i[3]),
         parseHex(i[4] + i[4]) / 255
       ]
+    } else if (color in colors) {
+      return rgba(colors[color as keyof typeof colors])
     }
     throw new Error(`[seemly/rgba]: Invalid color value ${color}.`)
   } catch (e) {

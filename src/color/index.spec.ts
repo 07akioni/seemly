@@ -24,5 +24,6 @@ describe('# toRgbString', () => {
   })
   it('rgba', () => {
     expect(toRgbString('rgba(1, 1, 1, 0.5)')).toEqual('rgb(1, 1, 1)')
+    expect(toRgbString('red')).toEqual('rgb(255, 0, 0)')
   })
 })
