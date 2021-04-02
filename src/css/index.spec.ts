@@ -1,6 +1,7 @@
 import {
   depx,
   getMargin,
+  getGap,
   pxfy,
   parseResponsiveProp,
   parseResponsivePropValue
@@ -68,6 +69,12 @@ describe('#css', () => {
       expect(getMargin(`0 1 2 3`, 'bottom')).toEqual('2')
       expect(getMargin(`0 1 2 3`, 'top')).toEqual('0')
     })
+  })
+  describe('#getGap', () => {
+    expect(getGap('5px 10px', 'row')).toEqual('5px')
+    expect(getGap('5px 10px', 'col')).toEqual('10px')
+    expect(getGap('5px 10px')).toEqual({ row: '5px', col: '10px' })
+    expect(getGap('5px')).toEqual({ row: '5px', col: '5px' })
   })
   describe('#parseResponsiveProp', () => {
     expect(parseResponsiveProp('')).toEqual({})

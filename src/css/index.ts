@@ -63,5 +63,21 @@ function getMargin (value: string, position?: Position) {
   return margin[position]
 }
 
-export { getMargin, getMargin as getPadding }
+export interface Gap {
+  row: string
+  col: string
+}
+
+function getGap(value: string): Gap
+function getGap(value: string, orient: 'row' | 'col'): string
+function getGap(value: string, orient?: 'row' | 'col'): string | Gap {
+  const [rowGap, colGap] = value.split(' ')
+  if (!orient) return {
+    row: rowGap,
+    col: colGap || rowGap
+  }
+  return orient === 'row' ? rowGap : colGap
+}
+
+export { getMargin, getMargin as getPadding, getGap }
 export { parseResponsiveProp, parseResponsivePropValue } from './responsive'
