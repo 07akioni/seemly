@@ -8,6 +8,7 @@ export {
   pxfy,
   getPadding,
   getMargin,
+  getGap,
   parseResponsiveProp,
   parseResponsivePropValue,
   Position,
