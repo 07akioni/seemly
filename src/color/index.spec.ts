@@ -1,4 +1,4 @@
-import { getAlpha, toRgbString, getAlphaString } from '../index'
+import { getAlpha, toRgbString, getAlphaString, hsla, hsva } from '../index'
 
 describe('# getAlpha', () => {
   it('rgb', () => {
@@ -25,5 +25,44 @@ describe('# toRgbString', () => {
   it('rgba', () => {
     expect(toRgbString('rgba(1, 1, 1, 0.5)')).toEqual('rgb(1, 1, 1)')
     expect(toRgbString('red')).toEqual('rgb(255, 0, 0)')
+  })
+})
+
+
+describe('# hsla', () => {
+  it('hsa', () => {
+    expect(hsla('hsla(180, 50%, 60%, 0.5)')).toEqual([
+      180,
+      50,
+      60,
+      0.5
+    ])
+  })
+  it('hsla', () => {
+    expect(hsla('hsl(180, 50%, 60%)')).toEqual([
+      180,
+      50,
+      60,
+      1
+    ])
+  })
+})
+
+describe('# hsva', () => {
+  it('hsv', () => {
+    expect(hsva('hsv(180, 50%, 60%)')).toEqual([
+      180,
+      50,
+      60,
+      1
+    ])
+  })
+  it('hsva', () => {
+    expect(hsva('hsva(180, 50%, 60%, 0.5)')).toEqual([
+      180,
+      50,
+      60,
+      0.5
+    ])
   })
 })

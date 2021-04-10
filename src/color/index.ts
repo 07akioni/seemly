@@ -2,13 +2,22 @@ import colors  from './colors'
 
 export type RGBA = [number, number, number, number]
 export type RGB = [number, number, number]
+export type HSLA = [number, number, number, number]
+export type HSVA = [number, number, number, number]
+export type HSL = [number, number, number]
+export type HSV = [number, number, number]
 
 const prefix = '^\\s*'
 const suffix = '\\s*$'
 const num = '\\s*(\\d+)\\s*'
+const percent = '\\s*(\\d+)%\\s*'
 const float = '\\s*((\\.\\d+)|(\\d+(\\.\\d*)?))\\s*'
 const hex = '([0-9A-Fa-f])'
 const dhex = '([0-9A-Fa-f]{2})'
+const hslRegex = new RegExp(`${prefix}hsl\\s*\\(${num},${percent},${percent}\\)${suffix}`)
+const hsvRegex = new RegExp(`${prefix}hsv\\s*\\(${num},${percent},${percent}\\)${suffix}`)
+const hslaRegex = new RegExp(`${prefix}hsla\\s*\\(${num},${percent},${percent},${float}\\)${suffix}`)
+const hsvaRegex =  new RegExp(`${prefix}hsva\\s*\\(${num},${percent},${percent},${float}\\)${suffix}`)
 const rgbRegex = new RegExp(`${prefix}rgb\\s*\\(${num},${num},${num}\\)${suffix}`)
 const rgbaRegex = new RegExp(`${prefix}rgba\\s*\\(${num},${num},${num},${float}\\)${suffix}`)
 const sHexRegex = new RegExp(`${prefix}#${hex}${hex}${hex}${suffix}`)
@@ -20,8 +29,70 @@ function parseHex (value: string): number {
   return parseInt(value, 16)
 }
 
-// `color` only support #000[0], #000000[00], rgb(0, 0, 0), rgba(0, 0, 0, 0) and
-// basic color keywords https://www.w3.org/TR/css-color-3/#html4 and transparent
+/**
+ * Convert color string to hsla array
+ * @param color format like hsl(180, 100%, 100%), hsla(180, 100%, 100%, 1)
+ * @returns 
+ */
+export function hsla (color: string): HSLA {
+  try {
+    let i
+    if (i = hslaRegex.exec(color)) {
+      return [
+        parseInt(i[1]),
+        parseInt(i[2]),
+        parseInt(i[3]),
+        Number(i[4]),
+      ]
+    } else if (i = hslRegex.exec(color)) {
+      return [
+        parseInt(i[1]),
+        parseInt(i[2]),
+        parseInt(i[3]),
+        1
+      ]
+    }
+    throw new Error(`[seemly/hsla]: Invalid color value ${color}.`)
+  } catch (e) {
+    throw e
+  }
+}
+
+/**
+ * Convert color string to hsva array
+ * @param color format like hsv(180, 100%, 100%), hsva(180, 100%, 100%, 1)
+ * @returns 
+ */
+ export function hsva (color: string): HSLA {
+  try {
+    let i
+    if (i = hsvaRegex.exec(color)) {
+      return [
+        parseInt(i[1]),
+        parseInt(i[2]),
+        parseInt(i[3]),
+        Number(i[4]),
+      ]
+    } else if (i = hsvRegex.exec(color)) {
+      return [
+        parseInt(i[1]),
+        parseInt(i[2]),
+        parseInt(i[3]),
+        1
+      ]
+    }
+    throw new Error(`[seemly/hsva]: Invalid color value ${color}.`)
+  } catch (e) {
+    throw e
+  }
+}
+
+
+/**
+ * Convert color string to rgba array.
+ * @param color format like #000[0], #000000[00], rgb(0, 0, 0), rgba(0, 0, 0, 0) and basic color keywords https://www.w3.org/TR/css-color-3/#html4 and transparent
+ * @returns 
+ */
 export function rgba (color: string): RGBA {
   try {
     let i
@@ -166,4 +237,4 @@ export function toRgbString (base: string | RGB | RGBA): string {
   return stringifyRgb(r, g, b)
 }
 
-export { hsl2hsv, hsv2hsl, hsv2rgb, rgb2hsv, HSV, HSL } from './convert'
+export { hsl2hsv, hsv2hsl, hsv2rgb, rgb2hsv } from './convert'

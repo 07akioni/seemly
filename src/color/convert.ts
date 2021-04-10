@@ -1,7 +1,4 @@
-import { RGB } from '.'
-
-export type HSV = [number, number, number]
-export type HSL = [number, number, number]
+import { RGB, HSV, HSL } from '.'
 
 /**
  * @param h 360
