@@ -7,20 +7,27 @@ import {
   hsv2hsl,
   hsv2rgb,
   rgb2hsv,
-  hsl2hsv
+  hsl2hsv,
+  rgb2hsl,
+  hsl2rgb
 } from '../index'
 
-function round (arr: number[]) {
-  return arr.map(v => Math.round(v))
+function round(arr: number[]) {
+  return arr.map((v) => Math.round(v))
 }
 
 describe('# convert', () => {
-  // https://convertingcolors.com/
-  // rgb(167, 64, 174)
+  // https://convertingcolors.com/rgb-color-167_64_174.html?search=rgb(167,%2064,%20174)
+  // Hex	A740AE
+  // RGB	167, 64, 174
+  // HSL	296, 46%, 47%
+  // HSV	296, 63%, 68%
   expect(round(hsv2hsl(296, 63, 68))).toEqual([296, 46, 47])
   expect(round(hsl2hsv(296, 46, 47))).toEqual([296, 63, 69])
   expect(round(rgb2hsv(167, 64, 174))).toEqual([296, 63, 68])
-  expect(round(hsv2rgb(296, 63, 68))).toEqual([169, 65, 176])
+  expect(round(hsv2rgb(296, 63, 68))).toEqual([166, 64, 173])
+  expect(round(hsl2rgb(296, 46, 47))).toEqual([168, 65, 175])
+  expect(round(rgb2hsl(167, 64, 174))).toEqual([296, 46, 47])
 })
 
 describe('# getAlpha', () => {

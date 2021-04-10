@@ -26,6 +26,8 @@ export {
   hsl2hsv,
   hsv2rgb,
   rgb2hsv,
+  rgb2hsl,
+  hsl2rgb,
   hsla,
   hsva,
   ChangeColorOptions,
