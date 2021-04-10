@@ -237,4 +237,4 @@ export function toRgbString (base: string | RGB | RGBA): string {
   return stringifyRgb(r, g, b)
 }
 
-export { hsl2hsv, hsv2hsl, hsv2rgb, rgb2hsv } from './convert'
+export { hsl2hsv, hsv2hsl, hsv2rgb, rgb2hsv, rgb2hsl, hsl2rgb } from './convert'

@@ -1,5 +1,8 @@
 import { RGB, HSV, HSL } from '.'
 
+// All the algorithms credit to https://stackoverflow.com/questions/36721830/convert-hsl-to-rgb-and-hex/54014428#54014428
+// original author: Kamil Kiełczewski
+
 /**
  * @param h 360
  * @param s 100
@@ -56,4 +59,37 @@ export function rgb2hsv(r: number, g: number, b: number): HSV {
   let h =
     c && (v == r ? (g - b) / c : v == g ? 2 + (b - r) / c : 4 + (r - g) / c)
   return [60 * (h < 0 ? h + 6 : h), v && (c / v) * 100, v * 100]
+}
+
+/**
+ * @param r 255
+ * @param g 255
+ * @param b 255
+ * @returns [360, 100, 100]
+ */
+export function rgb2hsl(r: number, g: number, b: number): HSL {
+  r /= 255
+  g /= 255
+  b /= 255
+  let v = Math.max(r, g, b),
+    c = v - Math.min(r, g, b),
+    f = 1 - Math.abs(v + v - c - 1)
+  let h =
+    c && (v == r ? (g - b) / c : v == g ? 2 + (b - r) / c : 4 + (r - g) / c)
+  return [60 * (h < 0 ? h + 6 : h), f ? (c / f) * 100 : 0, (v + v - c) * 50]
+}
+
+/**
+ * @param h 360
+ * @param s 100
+ * @param l 100
+ * @returns [255, 255, 255]
+ */
+export function hsl2rgb(h: number, s: number, l: number): RGB {
+  s /= 100
+  l /= 100
+  let a = s * Math.min(l, 1 - l)
+  let f = (n: number, k = (n + h / 30) % 12) =>
+    l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1)
+  return [f(0) * 255, f(8) * 255, f(4) * 255]
 }
