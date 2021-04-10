@@ -41,6 +41,8 @@ export {
   RGB,
   RGBA,
   HSL,
-  HSV
+  HSLA,
+  HSV,
+  HSVA
 } from './color'
 export { createId } from './misc/index'
