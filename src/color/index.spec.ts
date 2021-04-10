@@ -1,6 +1,5 @@
 import {
   getAlpha,
-  toRgbString,
   getAlphaString,
   hsla,
   hsva,
@@ -9,7 +8,13 @@ import {
   rgb2hsv,
   hsl2hsv,
   rgb2hsl,
-  hsl2rgb
+  hsl2rgb,
+  toRgbString,
+  toRgbaString,
+  toHslString,
+  toHslaString,
+  toHsvString,
+  toHsvaString
 } from '../index'
 
 function round(arr: number[]) {
@@ -73,5 +78,28 @@ describe('# hsva', () => {
   })
   it('hsva', () => {
     expect(hsva('hsva(180, 50%, 60%, 0.5)')).toEqual([180, 50, 60, 0.5])
+  })
+})
+
+describe('# toXxxString', () => {
+  it('works', () => {
+    expect(toHslString([180, 100, 100])).toEqual('hsl(180, 100%, 100%)')
+    expect(toHslString([180, 100, 100, 0.2])).toEqual('hsl(180, 100%, 100%)')
+    expect(toHslaString([180, 100, 100])).toEqual('hsla(180, 100%, 100%, 1)')
+    expect(toHslaString([180, 100, 100, 0.2])).toEqual(
+      'hsla(180, 100%, 100%, 0.2)'
+    )
+    expect(toHsvString([180, 100, 100])).toEqual('hsv(180, 100%, 100%)')
+    expect(toHsvString([180, 100, 100, 0.2])).toEqual('hsv(180, 100%, 100%)')
+    expect(toHsvaString([180, 100, 100])).toEqual('hsva(180, 100%, 100%, 1)')
+    expect(toHsvaString([180, 100, 100, 0.2])).toEqual(
+      'hsva(180, 100%, 100%, 0.2)'
+    )
+    expect(toRgbString([180, 100, 100])).toEqual('rgb(180, 100, 100)')
+    expect(toRgbString([180, 100, 100, 0.2])).toEqual('rgb(180, 100, 100)')
+    expect(toRgbaString([180, 100, 100])).toEqual('rgba(180, 100, 100, 1)')
+    expect(toRgbaString([180, 100, 100, 0.2])).toEqual(
+      'rgba(180, 100, 100, 0.2)'
+    )
   })
 })

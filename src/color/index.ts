@@ -237,4 +237,36 @@ export function toRgbString (base: string | RGB | RGBA): string {
   return stringifyRgb(r, g, b)
 }
 
+export function toRgbaString (base: RGBA | RGB): string {
+  const [r, g, b] = base
+  if (3 in base) {
+    return `rgba(${r}, ${g}, ${b}, ${base[3]})`
+  }
+  return `rgba(${r}, ${g}, ${b}, 1)`
+}
+
+export function toHsvString (base: HSVA | HSV): string {
+  return `hsv(${base[0]}, ${base[1]}%, ${base[2]}%)`
+}
+
+export function toHsvaString (base: HSVA | HSV): string {
+  const [h, s, v] = base
+  if (3 in base) {
+    return `hsva(${h}, ${s}%, ${v}%, ${base[3]})`
+  }
+  return `hsva(${h}, ${s}%, ${v}%, 1)`
+}
+
+export function toHslString (base: HSVA | HSV): string {
+  return `hsl(${base[0]}, ${base[1]}%, ${base[2]}%)`
+}
+
+export function toHslaString (base: HSLA | HSL): string {
+  const [h, s, l] = base
+  if (3 in base) {
+    return `hsla(${h}, ${s}%, ${l}%, ${base[3]})`
+  }
+  return `hsla(${h}, ${s}%, ${l}%, 1)`
+}
+
 export { hsl2hsv, hsv2hsl, hsv2rgb, rgb2hsv, rgb2hsl, hsl2rgb } from './convert'
