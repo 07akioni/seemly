@@ -165,3 +165,5 @@ export function toRgbString (base: string | RGB | RGBA): string {
   const [r, g, b] = Array.isArray(base) ? base : rgba(base)
   return stringifyRgb(r, g, b)
 }
+
+export { hsl2hsv, hsv2hsl, hsv2rgb, rgb2hsv, HSV, HSL } from './convert'

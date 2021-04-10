@@ -22,9 +22,15 @@ export {
   getAlphaString,
   toRgbString,
   getAlpha,
+  hsv2hsl,
+  hsl2hsv,
+  hsv2rgb,
+  rgb2hsv,
   ChangeColorOptions,
   ScaleColorOptions,
   RGB,
-  RGBA
+  RGBA,
+  HSL,
+  HSV
 } from './color'
 export { createId } from './misc/index'
