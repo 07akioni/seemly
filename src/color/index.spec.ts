@@ -81,6 +81,24 @@ describe('# hsva', () => {
   })
 })
 
+describe('# conversion', () => {
+  const input = [30, 40, 50] as const
+  const toFixed = (arr: readonly number[]) => arr.map(v => v.toFixed(2))
+  const output = toFixed(input)
+  it('rgb', () => {
+    expect(toFixed(hsl2rgb(...rgb2hsl(...input)))).toEqual(output)
+    expect(toFixed(hsv2rgb(...rgb2hsv(...input)))).toEqual(output)
+  })
+  it('hsl', () => {
+    expect(toFixed(rgb2hsl(...hsl2rgb(...input)))).toEqual(output)
+    expect(toFixed(hsv2hsl(...hsl2hsv(...input)))).toEqual(output)
+  })
+  it('hsv', () => {
+    expect(toFixed(rgb2hsv(...hsv2rgb(...input)))).toEqual(output)
+    expect(toFixed(hsl2hsv(...hsv2hsl(...input)))).toEqual(output)
+  })
+})
+
 describe('# toXxxString', () => {
   it('works', () => {
     expect(toHslString([180, 100, 100])).toEqual('hsl(180, 100%, 100%)')
