@@ -20,7 +20,6 @@ export {
   composite,
   scaleColor,
   getAlphaString,
-  
   getAlpha,
   hsv2hsl,
   hsl2hsv,
@@ -36,6 +35,8 @@ export {
   toHsvaString,
   toRgbaString,
   toRgbString,
+  toHexaString,
+  toHexString,
   ChangeColorOptions,
   ScaleColorOptions,
   RGB,
