@@ -291,4 +291,25 @@ export function toHslaString(base: HSLA | HSL): string {
   return `hsla(${roundDeg(h)}, ${roundPercent(s)}%, ${roundPercent(l)}%, 1)`
 }
 
+export function toHexaString(base: RGBA | RGB): string {
+  const hex = `#${base
+    .slice(0, 3)
+    .map((unit) => roundChannel(unit).toString(16).toUpperCase())
+    .join('')}`
+  const a =
+    base.length === 3
+      ? 'FF'
+      : roundChannel(base[3] * 255)
+          .toString(16)
+          .toUpperCase()
+  return hex + a
+}
+
+export function toHexString(base: RGBA | RGB): string {
+  return `#${base
+    .slice(0, 3)
+    .map((unit) => unit.toString(16).toUpperCase())
+    .join('')}`
+}
+
 export { hsl2hsv, hsv2hsl, hsv2rgb, rgb2hsv, rgb2hsl, hsl2rgb } from './convert'

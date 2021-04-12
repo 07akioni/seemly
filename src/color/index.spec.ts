@@ -14,7 +14,9 @@ import {
   toHslString,
   toHslaString,
   toHsvString,
-  toHsvaString
+  toHsvaString,
+  toHexString,
+  toHexaString,
 } from '../index'
 
 function round(arr: number[]) {
@@ -119,5 +121,9 @@ describe('# toXxxString', () => {
     expect(toRgbaString([180, 100, 100, 0.2])).toEqual(
       'rgba(180, 100, 100, 0.2)'
     )
+    expect(toHexaString([255, 255, 255, 1])).toEqual('#FFFFFFFF')
+    expect(toHexaString([255, 255, 255])).toEqual('#FFFFFFFF')
+    expect(toHexString([255, 255, 255, 1])).toEqual('#FFFFFF')
+    expect(toHexString([255, 255, 255])).toEqual('#FFFFFF')
   })
 })
