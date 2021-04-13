@@ -294,13 +294,16 @@ export function toHslaString(base: HSLA | HSL): string {
 export function toHexaString(base: RGBA | RGB): string {
   const hex = `#${base
     .slice(0, 3)
-    .map((unit) => roundChannel(unit).toString(16).toUpperCase())
+    .map((unit) =>
+      roundChannel(unit).toString(16).toUpperCase().padStart(2, '0')
+    )
     .join('')}`
   const a =
     base.length === 3
       ? 'FF'
       : roundChannel(base[3] * 255)
           .toString(16)
+          .padStart(2, '0')
           .toUpperCase()
   return hex + a
 }
@@ -308,7 +311,9 @@ export function toHexaString(base: RGBA | RGB): string {
 export function toHexString(base: RGBA | RGB): string {
   return `#${base
     .slice(0, 3)
-    .map((unit) => unit.toString(16).toUpperCase())
+    .map((unit) =>
+      roundChannel(unit).toString(16).toUpperCase().padStart(2, '0')
+    )
     .join('')}`
 }
 
