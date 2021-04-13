@@ -204,7 +204,7 @@ export function scaleColor(
 ): string {
   const [r, g, b, a = 1] = Array.isArray(base) ? base : rgba(base)
   const { lightness = 1, alpha = 1 } = options
-  return stringifyRgba(r * lightness, g * lightness, b * lightness, a * alpha)
+  return toRgbaString([r * lightness, g * lightness, b * lightness, a * alpha])
 }
 
 export function getAlpha(base: string | RGB | RGBA): number {
