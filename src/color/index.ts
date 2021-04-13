@@ -216,28 +216,28 @@ export function getAlphaString(base: string | RGB | RGBA): string {
   return `${getAlpha(base)}`
 }
 
-function roundAlpha(value: number | string): number {
+export function roundAlpha(value: number | string): number {
   const v = Math.round(Number(value) * 100) / 100
   if (v > 1) return 1
   if (v < 0) return 0
   return v
 }
 
-function roundDeg(value: number | string): number {
+export function roundDeg(value: number | string): number {
   const v = Math.round(Number(value))
   if (v >= 360) return 0
   if (v < 0) return 0
   return v
 }
 
-function roundChannel(value: number | string): number {
+export function roundChannel(value: number | string): number {
   const v = Math.round(Number(value))
   if (v > 255) return 255
   if (v < 0) return 0
   return v
 }
 
-function roundPercent(value: number | string): number {
+export function roundPercent(value: number | string): number {
   const v = Math.round(Number(value))
   if (v > 100) return 100
   if (v < 0) return 0
