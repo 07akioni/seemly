@@ -158,7 +158,7 @@ function compositeChannel(
   a2: number,
   a: number
 ) {
-  return Math.floor((v1 * a1 * (1 - a2) + v2 * a2) / a)
+  return roundChannel((v1 * a1 * (1 - a2) + v2 * a2) / a)
 }
 
 export function composite(
@@ -169,7 +169,7 @@ export function composite(
   if (!Array.isArray(overlay)) overlay = rgba(overlay)
   const a1 = (background as RGBA)[3]
   const a2 = (overlay as RGBA)[3]
-  const alpha = a1 + a2 - a1 * a2
+  const alpha = roundAlpha(a1 + a2 - a1 * a2)
   return stringifyRgba(
     compositeChannel(background[0], a1, overlay[0], a2, alpha),
     compositeChannel(background[1], a1, overlay[1], a2, alpha),
