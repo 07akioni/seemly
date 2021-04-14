@@ -291,7 +291,25 @@ export function toHslaString(base: HSLA | HSL): string {
   return `hsla(${roundDeg(h)}, ${roundPercent(s)}%, ${roundPercent(l)}%, 1)`
 }
 
-export function toHexaString(base: RGBA | RGB): string {
+/**
+ * 
+ * @param base [255, 255, 255, 255], [255, 255, 255], any hex string
+ * @returns 
+ */
+export function toHexaString(base: RGBA | RGB | string): string {
+  if (typeof base === 'string') {
+    let i
+    if (i = hexRegex.exec(base)) {
+      return `${i[0]}FF`
+    } else if (i = hexaRegex.exec(base)) {
+      return i[0]
+    } else if (i = sHexRegex.exec(base)) {
+      return `#${i[1]}${i[1]}${i[2]}${i[2]}${i[3]}${i[3]}FF`
+    } else if (i = sHexaRegex.exec(base)) {
+      return `#${i[1]}${i[1]}${i[2]}${i[2]}${i[3]}${i[3]}${i[4]}${i[4]}`
+    }
+    throw new Error(`[seemly/toHexString]: Invalid hex value ${base}.`)
+  }
   const hex = `#${base
     .slice(0, 3)
     .map((unit) =>
@@ -308,7 +326,23 @@ export function toHexaString(base: RGBA | RGB): string {
   return hex + a
 }
 
-export function toHexString(base: RGBA | RGB): string {
+/**
+ * 
+ * @param base [255, 255, 255, 255], [255, 255, 255], any hex string
+ * @returns 
+ */
+export function toHexString(base: RGBA | RGB | string): string {
+  if (typeof base === 'string') {
+    let i
+    if (i = hexRegex.exec(base)) {
+      return i[0]
+    } else if (i = hexaRegex.exec(base)) {
+      return i[0].slice(0, 7)
+    } else if (i = (sHexRegex.exec(base) || sHexaRegex.exec(base))) {
+      return `#${i[1]}${i[1]}${i[2]}${i[2]}${i[3]}${i[3]}`
+    }
+    throw new Error(`[seemly/toHexString]: Invalid hex value ${base}.`)
+  }
   return `#${base
     .slice(0, 3)
     .map((unit) =>
