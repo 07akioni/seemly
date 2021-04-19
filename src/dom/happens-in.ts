@@ -1,4 +1,4 @@
-export function happensIn (e: MouseEvent, dataSetPropName: string): boolean {
+export function happensIn (e: Event, dataSetPropName: string): boolean {
   let { target } = e
   while (target) {
     if ((target as HTMLElement).dataset) {
