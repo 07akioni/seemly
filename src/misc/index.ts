@@ -4,7 +4,7 @@ export function createId(length: number = 8): string {
     .slice(2, 2 + length)
 }
 
-export function repeat<T>(v: T, count: number): T[] {
+export function repeat<T>(count: number, v: T): T[] {
   const ret = []
   for (let i = 0; i < count; ++i) {
     ret.push(v)
@@ -12,13 +12,23 @@ export function repeat<T>(v: T, count: number): T[] {
   return ret
 }
 
-export function indexMap<T>(
-  createValue: (index: number) => T,
-  count: number
-): T[] {
+function indexMap(count: number): number[]
+function indexMap<T>(count: number, createValue: (index: number) => T): T[]
+function indexMap(
+  count: number,
+  createValue?: (index: number) => unknown
+): unknown[] {
   const ret = []
+  if (!createValue) {
+    for (let i = 0; i < count; ++i) {
+      ret.push(i)
+    }
+    return ret
+  }
   for (let i = 0; i < count; ++i) {
     ret.push(createValue(i))
   }
   return ret
 }
+
+export { indexMap }
