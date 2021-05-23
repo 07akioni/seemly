@@ -50,4 +50,4 @@ export {
   HSV,
   HSVA
 } from './color'
-export { createId, repeat, indexMap } from './misc/index'
+export { createId, repeat, indexMap, sleep } from './misc/index'
