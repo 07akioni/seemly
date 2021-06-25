@@ -2,7 +2,10 @@ export function happensIn (e: MouseEvent, dataSetPropName: string): boolean {
   let { target } = e
   while (target) {
     if ((target as HTMLElement).dataset) {
-      if ((target as HTMLElement).dataset[dataSetPropName] !== undefined) return true
+      if (
+        (target as HTMLElement).dataset[dataSetPropName] !== undefined &&
+        (target as HTMLElement).dataset[dataSetPropName] !== 'false'
+      ) return true
     }
     target = (target as Node).parentElement
   }
