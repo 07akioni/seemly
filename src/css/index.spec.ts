@@ -116,6 +116,23 @@ describe('#css', () => {
     )
     expect(parseResponsivePropValue('m:2-23  l:3-23  ', 'x')).toEqual(undefined)
   })
+  describe('#parseResponsivePropValue (by key array)', () => {
+    expect(
+      parseResponsivePropValue('  123  m:2-23  l:3-23  ', undefined)
+    ).toEqual('123')
+    expect(
+      parseResponsivePropValue('  123  m:2-23  l:3-23  ', ['s', 'm'])
+    ).toEqual('2-23')
+    expect(
+      parseResponsivePropValue('  123  m:2-23  l:3-23  ', ['s', 'm', 'l'])
+    ).toEqual('3-23')
+    expect(parseResponsivePropValue('  123  m:2-23  l:3-23  ', ['x'])).toEqual(
+      '123'
+    )
+    expect(parseResponsivePropValue('m:2-23  l:3-23  ', ['x'])).toEqual(
+      undefined
+    )
+  })
   describe('#parseResponsivePropValue (by width)', () => {
     expect(parseResponsivePropValue('4  768:5  1280:6', undefined)).toEqual('4')
     expect(parseResponsivePropValue('4  768:5  1280:6', '')).toEqual('4')
