@@ -32,20 +32,30 @@ function parseResponsivePropValue( // query by number
   reponsiveProp: string | number,
   activeSize?: number | undefined
 ): string | undefined
+function parseResponsivePropValue( // query by number
+  reponsiveProp: string | number,
+  activeSize?: string[]
+): string | undefined
 function parseResponsivePropValue( // fallback
   reponsiveProp: string | number | undefined | null,
-  activeKeyOrSize?: number | string | undefined
+  activeKeyOrSize?: number | string | string[] | undefined
 ): string | undefined
 function parseResponsivePropValue(
   reponsiveProp: string | number | undefined | null,
-  activeKeyOrSize?: number | string | undefined
+  activeKeyOrSize?: number | string | string[] | undefined
 ): string | undefined {
   if (reponsiveProp === undefined || reponsiveProp === null) return undefined
   const classObj = parseResponsiveProp(reponsiveProp)
   if (activeKeyOrSize === undefined) return classObj['']
   if (typeof activeKeyOrSize === 'string') {
     return classObj[activeKeyOrSize] ?? classObj['']
-  } else {
+  } else if (Array.isArray(activeKeyOrSize)) {
+    for (let i = activeKeyOrSize.length - 1; i >= 0; --i) {
+      const key: string = activeKeyOrSize[i]
+      if (key in classObj) return classObj[key]
+    }
+    return classObj['']
+  } else{
     // Here we suppose all the keys are number formatted
     let activeValue: string | undefined = undefined
     let activeKey: number = -1
