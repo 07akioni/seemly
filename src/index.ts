@@ -3,6 +3,7 @@ export { beforeNextFrame } from './animation/next-frame'
 export { getScrollParent } from './dom/get-scroll-parent'
 export { unwrapElement } from './dom/unwrap-element'
 export { happensIn } from './dom/happens-in'
+export { getPreciseEventTarget } from './dom/get-precise-event-target'
 export {
   depx,
   pxfy,
