@@ -1,4 +1,5 @@
 import colors from './colors'
+import { hlsStringToRGB } from "./hsl-matcher"
 
 export type RGBA = [number, number, number, number]
 export type RGB = [number, number, number]
@@ -128,6 +129,13 @@ export function rgba(color: string): RGBA {
         parseHex(i[3] + i[3]),
         roundAlpha(parseHex(i[4] + i[4]) / 255)
       ]
+    } else if (/^hsl/.test(color)) {
+      const rgbColor = hlsStringToRGB(color)
+      if (!rgbColor)
+        throw new Error(`[seemly/rgba]: Invalid hsl(a) color value ${color}.`)
+
+      const { r, g, b, a } = { a: 1, ...rgbColor }
+      return rgba(`rgba(${r}, ${g}, ${b}, ${a})`)
     } else if (color in colors) {
       return rgba(colors[color as keyof typeof colors])
     }
@@ -320,9 +328,9 @@ export function toHexaString(base: RGBA | RGB | string): string {
     base.length === 3
       ? 'FF'
       : roundChannel(base[3] * 255)
-          .toString(16)
-          .padStart(2, '0')
-          .toUpperCase()
+        .toString(16)
+        .padStart(2, '0')
+        .toUpperCase()
   return hex + a
 }
 
