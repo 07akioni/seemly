@@ -10,11 +10,11 @@
     "es"
   ],
   "scripts": {
-    "build": "npm run clean && tsc -p tsconfig.cjs.json && tsc -p tsconfig.esm.json",
+    "build": "pnpm run clean && tsc -p tsconfig.cjs.json && tsc -p tsconfig.esm.json",
     "clean": "rm -rf es lib",
     "test-dts": "tsc --noEmit src/dts.spec.ts",
-    "test": "npm run test-dts && jest src/**/*.spec.ts",
-    "release": "npm run build && npm publish"
+    "test": "pnpm run test-dts && jest src/**/*.spec.ts",
+    "release": "pnpm run build && pnpm publish"
   },
   "author": "07akioni",
   "license": "MIT",
