@@ -1,11 +1,10 @@
 export function happensIn(
   e: {
-    currentTarget: EventTarget | null
     target: EventTarget | null
   },
   dataSetPropName: string
 ): boolean {
-  let target = e.currentTarget || e.target
+  let { target } = e
   while (target) {
     if ((target as HTMLElement).dataset) {
       if ((target as HTMLElement).dataset[dataSetPropName] !== undefined)
