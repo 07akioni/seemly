@@ -195,7 +195,7 @@ export function changeColor(
   options: ChangeColorOptions
 ): string {
   const [r, g, b, a = 1] = Array.isArray(base) ? base : rgba(base)
-  if (options.alpha) {
+  if (typeof options.alpha === 'number') {
     return stringifyRgba(r, g, b, options.alpha)
   }
   return stringifyRgba(r, g, b, a)
