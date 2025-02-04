@@ -1,5 +1,7 @@
 import { beforeNextFrame, beforeNextFrameOnce } from '../index'
 
+declare const global: any
+
 global.requestAnimationFrame = (f: Function) => {
   window.setTimeout(f, 0)
   return 1

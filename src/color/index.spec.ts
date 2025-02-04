@@ -17,6 +17,7 @@ import {
   toHsvaString,
   toHexString,
   toHexaString,
+  rgba,
 } from '../index'
 
 function round(arr: number[]) {
@@ -35,6 +36,12 @@ describe('# convert', () => {
   expect(round(hsv2rgb(296, 63, 68))).toEqual([166, 64, 173])
   expect(round(hsl2rgb(296, 46, 47))).toEqual([168, 65, 175])
   expect(round(rgb2hsl(167, 64, 174))).toEqual([296, 46, 47])
+  expect(round(rgba('hsv(296, 63%, 68%)'))).toEqual([166, 64, 173, 1])
+  expect(round(rgba('hsl(296, 46%, 47%)'))).toEqual([168, 65, 175, 1])
+  expect(round(rgba('hsva(296, 63%, 68%, 0.5)'))).toEqual([166, 64, 173, 1])
+  expect(round(rgba('hsla(296, 46%, 47%, 0.5)'))).toEqual([168, 65, 175, 1])
+  expect(rgba('hsva(296, 63%, 68%, 0.5)')[3]).toEqual(0.5)
+  expect(rgba('hsla(296, 46%, 47%, 0.5)')[3]).toEqual(0.5)
 })
 
 describe('# getAlpha', () => {

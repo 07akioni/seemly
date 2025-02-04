@@ -1,11 +1,10 @@
 {
-  "include": [
-    "src"
-  ],
+  "include": ["src"],
   "compilerOptions": {
     "lib": ["ESNext", "DOM"],
     "declaration": true,
     "strict": true,
+    "noEmit": true,
     "moduleResolution": "node"
   }
 }

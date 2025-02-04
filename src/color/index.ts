@@ -1,4 +1,5 @@
 import colors from './colors'
+import { hsl2rgb, hsv2rgb } from './convert'
 
 export type RGBA = [number, number, number, number]
 export type RGB = [number, number, number]
@@ -90,7 +91,9 @@ export function hsva(color: string): HSLA {
 
 /**
  * Convert color string to rgba array.
- * @param color format like #000[0], #000000[00], rgb(0, 0, 0), rgba(0, 0, 0, 0) and basic color keywords https://www.w3.org/TR/css-color-3/#html4 and transparent
+ * @param color format like #000[0], #000000[00], rgb(0, 0, 0),
+ * rgba(0, 0, 0, 0), hsl(a) color, hsv(a) color and color keywords and
+ * transparent
  * @returns
  */
 export function rgba(color: string): RGBA {
@@ -130,6 +133,12 @@ export function rgba(color: string): RGBA {
       ]
     } else if (color in colors) {
       return rgba(colors[color as keyof typeof colors])
+    } else if (hslRegex.test(color) || hslaRegex.test(color)) {
+      const [h, s, l, a] = hsla(color)
+      return [...hsl2rgb(h, s, l), a]
+    } else if (hsvRegex.test(color) || hsvaRegex.test(color)) {
+      const [h, s, v, a] = hsva(color)
+      return [...hsv2rgb(h, s, v), a]
     }
     throw new Error(`[seemly/rgba]: Invalid color value ${color}.`)
   } catch (e) {
@@ -320,9 +329,9 @@ export function toHexaString(base: RGBA | RGB | string): string {
     base.length === 3
       ? 'FF'
       : roundChannel(base[3] * 255)
-          .toString(16)
-          .padStart(2, '0')
-          .toUpperCase()
+        .toString(16)
+        .padStart(2, '0')
+        .toUpperCase()
   return hex + a
 }
 
